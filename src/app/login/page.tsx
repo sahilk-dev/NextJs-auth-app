@@ -24,7 +24,7 @@ export default function LoginPage() {
             router.push("/profile");
         } catch (error:any) {
             console.log("Login failed", error.message);
-            toast.error(error.message);
+            toast.error("Invalid credentials");
         } finally {
             setLoading(false);
         }
