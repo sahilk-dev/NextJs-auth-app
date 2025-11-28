@@ -40,35 +40,58 @@ export default function LoginPage() {
 
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1>{loading ? "Processing" : "Login"}</h1>
-            <hr />
-            <label htmlFor="email">email</label>
-            <input
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
-                id="email"
-                type="text"
-                value={user.email}
-                onChange={(e) => setUser({...user, email: e.target.value})}
-                placeholder="email"
-            />
+        <div className="bg-linear-to-br from-indigo-900 via-purple-900 to-violet-800 min-h-screen flex items-center justify-center">
+            <div className="bg-white text-gray-900 rounded-2xl shadow-2xl p-8">
+                <h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
+                    {loading ? "Processing..." : "Log In"}
+                </h1>
+                {/* <hr className="mb-6" /> */}
+                
+                <div className="space-y-4">
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium mb-1 text-gray-700">
+                            Email
+                        </label>
+                        <input
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            id="email"
+                            type="text"
+                            value={user.email}
+                            onChange={(e) => setUser({...user, email: e.target.value})}
+                            placeholder="Enter your email"
+                        />
+                    </div>
 
-            <label htmlFor="password">password</label>
-            <input
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
-                id="password"
-                type="text"
-                value={user.password}
-                onChange={(e) => setUser({...user, password: e.target.value})}
-                placeholder="password"
-            />
-            <button
-                onClick={onLogin}
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
-            >
-                Login here
-            </button>
-            <Link href="/signup">Visit Signup page</Link>
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium mb-1 text-gray-700">
+                            Password
+                        </label>
+                        <input
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            id="password"
+                            type="text"
+                            value={user.password}
+                            onChange={(e) => setUser({...user, password: e.target.value})}
+                            placeholder="Enter your password"
+                        />
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    onClick={onLogin}
+                    className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg"
+                >
+                    Login here
+                </button>
+
+                <p className="text-center text-sm font-semibold mt-5">
+                    Don&apos;t have an account?{" "}
+                    <Link href="/signup" className="text-blue-500 hover:underline font-semibold">
+                        Sign Up
+                    </Link>
+                </p>
+            </div>
         </div>
     )
 }
