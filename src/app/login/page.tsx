@@ -40,9 +40,9 @@ export default function LoginPage() {
 
 
     return (
-        <div className="bg-linear-to-br from-indigo-900 via-purple-900 to-violet-800 min-h-screen flex items-center justify-center">
+        <div className="bg-linear-to-br from-gray-900 to-gray-800 min-h-screen flex items-center justify-center">
             <div className="bg-white text-gray-900 rounded-2xl shadow-2xl p-8">
-                <h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
+                <h1 className="text-3xl font-bold text-center mb-6 text-teal-600">
                     {loading ? "Processing..." : "Log In"}
                 </h1>
                 {/* <hr className="mb-6" /> */}
@@ -80,9 +80,9 @@ export default function LoginPage() {
                 <button
                     type="submit"
                     onClick={onLogin}
-                    className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg"
+                    className="w-full mt-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 rounded-lg"
                 >
-                    Login here
+                    Login
                 </button>
 
                 <p className="text-center text-sm font-semibold mt-5">
