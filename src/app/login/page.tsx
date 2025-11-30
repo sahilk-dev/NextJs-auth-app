@@ -59,6 +59,7 @@ export default function LoginPage() {
                             value={user.email}
                             onChange={(e) => setUser({...user, email: e.target.value})}
                             placeholder="Enter your email"
+                            required
                         />
                     </div>
 
@@ -73,6 +74,7 @@ export default function LoginPage() {
                             value={user.password}
                             onChange={(e) => setUser({...user, password: e.target.value})}
                             placeholder="Enter your password"
+                            required
                         />
                     </div>
                 </div>

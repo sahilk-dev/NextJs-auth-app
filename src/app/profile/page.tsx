@@ -1,46 +1,80 @@
 "use client";
 import axios from "axios";
-import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
+interface User {
+    username: string;
+    email: string;
+}
+
 export default function ProfilePage() {
+    const [user, setUser] = useState<User | null>(null);
     const router = useRouter();
-    const [data, setData] = useState("nothing");
+
+    useEffect(() => {
+        const getUserDetails = async () => {
+            try {
+                const res = await axios.get("/api/users/me");
+                console.log("API Response:", res.data)
+                setUser(res.data.data);
+            } catch (error) {
+                console.error("Error fetching user:", error);
+                router.push("/login");
+            }
+        };
+
+        getUserDetails();
+    }, [router]);
+
     const logout = async () => {
         try {
-            await axios.get("/api/users/logout")
+            await axios.get("/api/users/logout");
             toast.success("Logged out successfully.");
             router.push("/login");
-        } catch (error:any) {
-            console.log(error.message);
+        } catch (error) {
+            console.error("Error  during logout:", error);
             toast.error("Something went wrong during logout.");
-        }
     }
 
-    const getUserDetails = async () => {
-        const res = await axios.get("/api/users/me");
-        console.log(res.data);
-        setData(res.data.data._id);
-    }
+  };
 
-    return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1>Profile</h1>
-            <hr />
-            <p>Profile Page</p>
-            <h2 className="p-3 rounded bg-green-500">{data === 'nothing' ? "Nothing" : <Link href={`/profile/${data}`}>{data}</Link>}</h2>
-            <hr />
-            <button
-            onClick={logout}
-            className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >Logout</button>
-
-            <button
-            onClick={getUserDetails}
-            className="bg-green-800 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >Get User Details</button>
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-teal-700 px-4">
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+        {/* Header */}
+        <div className="text-center mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Your Profile</h2>
+          <p className="text-sm text-gray-500">Account details</p>
         </div>
-    )
+
+        <hr className="border-gray-200 mb-4" />
+
+        {/* Profile details */}
+        <div className="text-sm space-y-3 mb-6">
+          <div className="flex items-center justify-between">
+            <span className="text-gray-500">Name</span>
+            <span className="text-gray-800 font-medium">{user?.username}</span>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-gray-500">Email</span>
+            <span className="text-gray-800 font-medium">
+              {user?.email}
+            </span>
+          </div>
+        </div>
+
+        {/* Logout button */}
+        <button
+          type="button"
+          onClick={logout}
+          className="w-full py-2.5 rounded-md bg-red-500 hover:bg-red-600 text-white text-sm font-semibold transition shadow-sm"
+        >
+          Logout
+        </button>
+      </div>
+    </main>
+  );
 }

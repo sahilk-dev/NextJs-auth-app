@@ -59,6 +59,7 @@ export default function SignupPage() {
                             value={user.username}
                             onChange={(e) => setUser({...user, username: e.target.value})}
                             placeholder="Enter your username"
+                            required
                         />
 
                         <label htmlFor="email" className="block text-sm font-medium mb-1 text-gray-700">
@@ -71,6 +72,7 @@ export default function SignupPage() {
                             value={user.email}
                             onChange={(e) => setUser({...user, email: e.target.value})}
                             placeholder="Enter your email"
+                            required
                         />
 
                         <label htmlFor="password" className="block text-sm font-medium mb-1 text-gray-700">
@@ -83,6 +85,7 @@ export default function SignupPage() {
                             value={user.password}
                             onChange={(e) => setUser({...user, password: e.target.value})}
                             placeholder="Enter your password"
+                            required
                         />
                     </div>
                     <button
