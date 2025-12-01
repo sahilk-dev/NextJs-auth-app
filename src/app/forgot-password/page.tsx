@@ -1,11 +1,9 @@
 "use client"
 
 import { useState, FormEvent } from "react"
-import { useRouter } from "next/navigation";
 import axios from "axios"
 
 export default function ForgotPasswordPage() {
-    const router = useRouter();
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
@@ -20,7 +18,6 @@ export default function ForgotPasswordPage() {
         try {
             const res = await axios.post("/api/users/forgot-password", { email });
             setMessage(res.data.message || "If this email exists, a reset link has been sent.")
-            router.push("/reset-password")
         } catch (err: any) {
             console.error(err)
             setError(err.response?.data?.error || "Something went wrong. Please try again.")
